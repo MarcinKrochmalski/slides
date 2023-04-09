@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import "./style/variables";
+
+.app {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100vw;
+	height: 100vh;
+	font-family: 'Roboto', sans-serif;
+	color: $color-dark;
+	user-select: none;
+
+	.btn {
+		position: absolute;
+		display: flex;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 2;
+		width: $space * 5;
+		height: $space * 10;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba($color-light, $alpha: .8);
+		transition: all 0.2s ease-in-out 0s;
+		cursor: pointer;
+
+		@media screen and (max-width: $breaking-point-small) {
+			top: unset;
+			width: $space * 4;
+			height: $space * 4;
+		}
+
+		svg{
+			width: $space * 5;
+			height: auto;
+
+			@media screen and (max-width: $breaking-point-small) {
+				width: $space * 4;
+			}
+		}
+
+		&:first-of-type {
+			left: 0;
+
+			@media screen and (max-width: $breaking-point-small) {
+				left: unset;
+				right: 0;
+				top:0;
+				transform: rotate(90deg) translate(0% , 20%);
+			}
+		}
+
+		&:last-of-type {
+			right: 0;
+
+			@media screen and (max-width: $breaking-point-small) {
+				right: 0;
+				bottom: 0;
+				transform: rotate(90deg) translate(0%, 20%);
+			}
+		}
+
+		&:hover {
+			color: $color-red;
+			background-color: rgba($color-light, $alpha: 1);
+			transition: all 0.2s ease-in-out 0s;
+		}
+	}
+
+	.slides{
+		display: flex;
+		flex-flow: column wrap;
+		width: 100vw;
+		height: calc(100vh - ($space * 12));
+		overflow: hidden;
+
+		@media screen and (max-width: $breaking-point-small) {
+			display: unset;
+			overflow: auto;
+			height: 100vh;
+		}
+
+	}
+}

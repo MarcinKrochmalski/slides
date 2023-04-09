@@ -1,0 +1,44 @@
+@mixin jumper-animation($name, $width, $height) {
+    @keyframes #{$name} {
+        0%  {
+            width: $width;
+            height: $height;
+            padding: 0;
+            border: 0;
+            outline: none;
+        }
+        45%  {
+            height: 0;
+            opacity: 0;
+            padding: 0;
+            border: 0;
+        }
+        80%  {
+            height: 0;
+            opacity: 0;
+            padding: 0;
+            border: 0;
+        }
+        99%  {
+            padding: 0;
+            border: 0;
+        }
+        100% {
+            width: $width;
+            height: $height;
+            opacity: 1;
+        }
+    }
+}
+
+@mixin order-classes() {
+
+    @for $k from 0 through 1 {
+        @for $i from 1 through 6 {
+            .order-#{$i}-#{$k}{
+                order: $i;
+            }
+        }
+    }
+}
+

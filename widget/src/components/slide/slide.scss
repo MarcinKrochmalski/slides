@@ -1,0 +1,241 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+
+
+.slide {
+
+	display: flex;
+	flex-flow: column wrap;
+	justify-content:space-between;
+	width: 100vw;
+	height: calc(100vh - ($space * 12));
+	overflow: hidden;
+	transition: all $time-animation * .5 ease-in-out;
+
+	@media screen and (max-width: $breaking-point-small) {
+		overflow: unset;
+		flex-flow: row wrap;
+		justify-content:flex-start;
+		width: auto;
+		height: unset;
+	}
+
+	.item {
+		position: relative;
+		width: 15%;
+		height: 50%;
+		padding: $space;
+		overflow: hidden;
+		box-sizing: border-box;
+		border: $space solid $color-light;
+		transition: all $time-animation * .5 ease-in-out $time-animation * .5, order 0s $time-animation * .5;
+
+		@media screen and (max-width: $breaking-point-small) {
+			width: 100%;
+			height: 20vh;
+
+			order: 1;
+
+			&:has(.text){
+				order: 0;
+			}
+		}
+
+		img {
+			position: absolute;
+			min-width: 100%;
+			height: auto;
+			min-height: 100%;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 0;
+			cursor: pointer;
+			transition: all $time-animation * .5 ease-in-out;
+			&:hover{
+				transform: translate(-50%, -50%) scale(1.1);
+				transition: all $time-animation * .5 ease-in-out;
+			}
+			@media screen and (max-width: $breaking-point-small) {
+				width: 100%;
+				height: auto;
+			}
+		}
+
+		&:has(img){
+			background-color: $color-dark;
+		}
+
+		.text{
+
+			display: flex;
+			width: 100%;
+			height: 100%;
+			flex-flow: column nowrap;
+			justify-content: center;
+
+			h1{
+				padding: 0 $space * .5;
+				margin: $space 0;
+				font-size: 1.8rem;
+				box-sizing: border-box; 
+				text-transform: uppercase;
+
+				@media screen and (max-width: $breaking-point-medium) {
+					font-size: 1.4rem;
+					margin: $space * .5 0;
+				}
+
+				@media screen and (max-width: $breaking-point-small) {
+					padding: 0 $space * .2;
+					margin: $space * .2 0;
+				}
+			}
+
+			p{
+				padding: 0 $space * .5;
+				margin: 0 $space * .2;
+				font-size: .8rem;
+				line-height: 1.2rem;
+				letter-spacing: 1px;
+				box-sizing: border-box;
+				overflow: hidden;
+
+				@media screen and (max-width: $breaking-point-medium) {
+					font-size: .8rem;
+					margin: 0;
+				}
+
+				@media screen and (max-width: $breaking-point-small) {
+					padding: 0 $space * .2;
+				}
+			}
+		}
+
+		svg{
+			position: absolute;
+			bottom: $space;
+			right: $space;
+			width: $space * 4;
+			height: $space * 4;
+			z-index: 3;
+			color:$color-light;
+			opacity: .8;
+		}
+
+		&.active {
+			width: 45%;
+			height: 100%;
+			transition: all $time-animation * .5 ease-in-out;
+
+			@media screen and (max-width: $breaking-point-small) {
+				width: 100%;
+				height: auto;
+
+				img{
+					position: static;
+					transform: unset;
+					top: 0;
+					left: 0;
+
+					transition: unset;
+				}
+			}
+		}
+
+		&.large-width {
+			width: 25%;
+			@media screen and (max-width: $breaking-point-small) {
+				width: 100%;
+			}
+		}
+
+		&.large-height {
+			height: 100%;
+		}
+
+		&.jumper-0{
+			animation: jumper-0 $time-animation ease-in-out;
+		}
+
+		&.jumper-1{
+			animation: jumper-1 $time-animation ease-in-out;
+		}
+
+	}
+
+	&.size-2{
+		.item{
+			width: 20%;
+
+			@media screen and (max-width: $breaking-point-small) {
+				width: 100%;
+			}
+
+			&.active{
+				width: 60%;
+				@media screen and (max-width: $breaking-point-small) {
+					width: 100%;
+				}
+			}
+
+			&.jumper-0{
+				animation: jumper-size-2-0 $time-animation ease-in-out;
+			}
+	
+			&.jumper-1{
+				animation: jumper-size-2-1 $time-animation ease-in-out;
+			}
+		}
+	}
+
+	&.size-3{
+
+		.item{
+			width: 30%;
+
+			@media screen and (max-width: $breaking-point-small) {
+				width: 100%;
+			}
+
+			&.active{
+				width: 70%;
+				@media screen and (max-width: $breaking-point-small) {
+					width: 100%;
+				}
+			}
+
+			&.jumper-0{
+				animation: jumper-size-3-0 $time-animation ease-in-out;
+			}
+	
+			&.jumper-1{
+				animation: jumper-size-3-1 $time-animation ease-in-out;
+			}
+
+			&.large-width {
+				width: 30%;
+				@media screen and (max-width: $breaking-point-small) {
+					width: 100%;
+				}
+			}
+	
+		}
+	}
+
+	.item:has(.text){
+		@media screen and (max-width: $breaking-point-small) {
+			height: 40%;
+		}
+	}
+
+}
+
+@include jumper-animation(jumper-0, 15% , 50%);
+@include jumper-animation(jumper-1, 15% , 50%);
+@include jumper-animation(jumper-size-2-0, 20% , 50%);
+@include jumper-animation(jumper-size-2-1, 20% , 50%);
+@include jumper-animation(jumper-size-3-0, 30% , 50%);
+@include jumper-animation(jumper-size-3-1, 30% , 50%);
+
+@include order-classes();
