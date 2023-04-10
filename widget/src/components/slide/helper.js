@@ -32,17 +32,17 @@ export const setPositions = (items) => {
 export const setLargeWidth = (items) => {
   const lastIndex = items.length - 1;
   const even = isEven(items.length);
-  const lastItem = items.filter(item => item.order === lastIndex)[0];
-  const sumComponent =  even ? 1 : 2;
+  const lastItem = items.filter((item) => item.order === lastIndex)[0];
+  const sumComponent = even ? 1 : 2;
   for (const item of items) {
-    if( !item.active){
-      if(
-        (item.order > lastIndex-sumComponent && !lastItem.active)
-        || (item.order < 2 && lastItem.active)
-      ){
-        item.largeWidth=true;
-      }else{
-        item.largeWidth=false;
+    if (!item.active) {
+      if (
+        (item.order > lastIndex - sumComponent && !lastItem.active) ||
+        (item.order < 2 && lastItem.active)
+      ) {
+        item.largeWidth = true;
+      } else {
+        item.largeWidth = false;
       }
     }
   }
@@ -51,18 +51,18 @@ export const setLargeWidth = (items) => {
 
 export const setLargeHeight = (items) => {
   const even = isEven(items.length);
-  if(even){
+  if (even) {
     const lastIndex = items.length - 1;
-    const lastItem = items.filter(item => item.order === lastIndex)[0];
+    const lastItem = items.filter((item) => item.order === lastIndex)[0];
     for (const item of items) {
-      if( !item.active){
-        if(
-          (item.order === lastIndex && !lastItem.active)
-          || (item.order === lastIndex-1 && lastItem.active)
-        ){
-          item.largeHeight=true;
-        }else{
-          item.largeHeight=false;
+      if (!item.active) {
+        if (
+          (item.order === lastIndex && !lastItem.active) ||
+          (item.order === lastIndex - 1 && lastItem.active)
+        ) {
+          item.largeHeight = true;
+        } else {
+          item.largeHeight = false;
         }
       }
     }
@@ -70,14 +70,19 @@ export const setLargeHeight = (items) => {
   return items;
 };
 
-
 export const createItems = (photos, text, quantity, textIndex, activeIndex) => {
   const items = [];
-  if (textIndex && textIndex !== activeIndex) {
+  if (
+    photos.length &&
+    textIndex &&
+    textIndex !== activeIndex &&
+    quantity - 1 > textIndex &&
+    quantity - 1 > activeIndex
+  ) {
     let photoIndex = 0;
     for (let i = 0; i < quantity; i++) {
       const content = i === textIndex ? text : photos[photoIndex];
-      const contentType = i === textIndex ? 'text' : 'photo';
+      const contentType = i === textIndex ? "text" : "photo";
       items.push({
         i,
         order: i,
@@ -86,10 +91,10 @@ export const createItems = (photos, text, quantity, textIndex, activeIndex) => {
         position: null,
         content,
         contentType,
-        largeWidth:false,
-        largeHeight:false
+        largeWidth: false,
+        largeHeight: false,
       });
-      if(i !== textIndex)photoIndex++;
+      if (i !== textIndex) photoIndex++;
     }
   }
   return setPositions(setLargeHeight(setLargeWidth(items)));
@@ -113,8 +118,7 @@ export const sortItems = (items) => {
   return setPositions(items);
 };
 
-export const handleJumper = (newItems,jumperIndex,jumperNewOrder) => {
-
+export const handleJumper = (newItems, jumperIndex, jumperNewOrder) => {
   if (jumperIndex > -1) {
     newItems[jumperIndex] = {
       ...newItems[jumperIndex],
@@ -123,9 +127,8 @@ export const handleJumper = (newItems,jumperIndex,jumperNewOrder) => {
       jumper: true,
     };
   }
-
-}
+};
 
 const isEven = (n) => {
   return n % 2 === 0;
-}
+};

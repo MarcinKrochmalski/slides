@@ -6,7 +6,7 @@
 
 	display: flex;
 	flex-flow: column wrap;
-	justify-content:space-between;
+	justify-content: space-between;
 	width: 100vw;
 	height: calc(100vh - ($space * 12));
 	overflow: hidden;
@@ -15,7 +15,7 @@
 	@media screen and (max-width: $breaking-point-small) {
 		overflow: unset;
 		flex-flow: row wrap;
-		justify-content:flex-start;
+		justify-content: flex-start;
 		width: auto;
 		height: unset;
 	}
@@ -36,7 +36,7 @@
 
 			order: 1;
 
-			&:has(.text){
+			&:has(.text) {
 				order: 0;
 			}
 		}
@@ -52,21 +52,23 @@
 			z-index: 0;
 			cursor: pointer;
 			transition: all $time-animation * .5 ease-in-out;
-			&:hover{
+
+			&:hover {
 				transform: translate(-50%, -50%) scale(1.1);
 				transition: all $time-animation * .5 ease-in-out;
 			}
+
 			@media screen and (max-width: $breaking-point-small) {
 				width: 100%;
 				height: auto;
 			}
 		}
 
-		&:has(img){
+		&:has(img) {
 			background-color: $color-dark;
 		}
 
-		.text{
+		.text {
 
 			display: flex;
 			width: 100%;
@@ -74,11 +76,11 @@
 			flex-flow: column nowrap;
 			justify-content: center;
 
-			h1{
+			h1 {
 				padding: 0 $space * .5;
 				margin: $space 0;
 				font-size: 1.8rem;
-				box-sizing: border-box; 
+				box-sizing: border-box;
 				text-transform: uppercase;
 
 				@media screen and (max-width: $breaking-point-medium) {
@@ -92,7 +94,7 @@
 				}
 			}
 
-			p{
+			p {
 				padding: 0 $space * .5;
 				margin: 0 $space * .2;
 				font-size: .8rem;
@@ -112,14 +114,14 @@
 			}
 		}
 
-		svg{
+		svg {
 			position: absolute;
 			bottom: $space;
 			right: $space;
 			width: $space * 4;
 			height: $space * 4;
 			z-index: 3;
-			color:$color-light;
+			color: $color-light;
 			opacity: .8;
 		}
 
@@ -132,7 +134,7 @@
 				width: 100%;
 				height: auto;
 
-				img{
+				img {
 					position: static;
 					transform: unset;
 					top: 0;
@@ -145,6 +147,7 @@
 
 		&.large-width {
 			width: 25%;
+
 			@media screen and (max-width: $breaking-point-small) {
 				width: 100%;
 			}
@@ -154,76 +157,79 @@
 			height: 100%;
 		}
 
-		&.jumper-0{
+		&.jumper-0 {
 			animation: jumper-0 $time-animation ease-in-out;
 		}
 
-		&.jumper-1{
+		&.jumper-1 {
 			animation: jumper-1 $time-animation ease-in-out;
 		}
 
 	}
 
-	&.size-2{
-		.item{
+	&.size-2 {
+		.item {
 			width: 20%;
 
 			@media screen and (max-width: $breaking-point-small) {
 				width: 100%;
 			}
 
-			&.active{
+			&.active {
 				width: 60%;
+
 				@media screen and (max-width: $breaking-point-small) {
 					width: 100%;
 				}
 			}
 
-			&.jumper-0{
+			&.jumper-0 {
 				animation: jumper-size-2-0 $time-animation ease-in-out;
 			}
-	
-			&.jumper-1{
+
+			&.jumper-1 {
 				animation: jumper-size-2-1 $time-animation ease-in-out;
 			}
 		}
 	}
 
-	&.size-3{
+	&.size-3 {
 
-		.item{
+		.item {
 			width: 30%;
 
 			@media screen and (max-width: $breaking-point-small) {
 				width: 100%;
 			}
 
-			&.active{
+			&.active {
 				width: 70%;
+
 				@media screen and (max-width: $breaking-point-small) {
 					width: 100%;
 				}
 			}
 
-			&.jumper-0{
+			&.jumper-0 {
 				animation: jumper-size-3-0 $time-animation ease-in-out;
 			}
-	
-			&.jumper-1{
+
+			&.jumper-1 {
 				animation: jumper-size-3-1 $time-animation ease-in-out;
 			}
 
 			&.large-width {
 				width: 30%;
+
 				@media screen and (max-width: $breaking-point-small) {
 					width: 100%;
 				}
 			}
-	
+
 		}
 	}
 
-	.item:has(.text){
+	.item:has(.text) {
 		@media screen and (max-width: $breaking-point-small) {
 			height: 40%;
 		}
@@ -231,11 +237,11 @@
 
 }
 
-@include jumper-animation(jumper-0, 15% , 50%);
-@include jumper-animation(jumper-1, 15% , 50%);
-@include jumper-animation(jumper-size-2-0, 20% , 50%);
-@include jumper-animation(jumper-size-2-1, 20% , 50%);
-@include jumper-animation(jumper-size-3-0, 30% , 50%);
-@include jumper-animation(jumper-size-3-1, 30% , 50%);
+@include jumper-animation(jumper-0, 15%, 50%);
+@include jumper-animation(jumper-1, 15%, 50%);
+@include jumper-animation(jumper-size-2-0, 20%, 50%);
+@include jumper-animation(jumper-size-2-1, 20%, 50%);
+@include jumper-animation(jumper-size-3-0, 30%, 50%);
+@include jumper-animation(jumper-size-3-1, 30%, 50%);
 
 @include order-classes();

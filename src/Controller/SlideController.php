@@ -21,20 +21,20 @@ class SlideController extends AbstractController
             ['active' => true]
         );
 
-        return $this->render('slide/index.html.twig', ['slides' => $slides]);
+        return $this->render('slide/index.html.twig', ['slides' => $this->prepareSlides($slides)]);
 
     }
 
-    private function prepareJsonSlides($slides){
+    private function prepareSlides($slides){
 
-        $slidesToJson = [];
+        $slidesToWidget = [];
         foreach ($slides as $slide) {
             $photos = $slide->getPhoto();
 
-            $photosToJson = [];
+            $photosToWidget = [];
 
             foreach ($photos as $photo) {
-                $photosToJson[] = [
+                $photosToWidget[] = [
                     "id" => $photo->getId(),
                     "src" => $photo->getSrc(),
                     "title" => $photo->getTitle(),
@@ -42,19 +42,21 @@ class SlideController extends AbstractController
                 ];
             }
 
-            $slidesToJson[] = [
-                "text" => [
-                    "title" => $slide->getTitle(),
-                    "description" => $slide->getDescription(),
-                ],
-                "photos" => $photosToJson,
-                "textIndex" => 4,
-                "activeIndex" => 0,
+            if(count($photosToWidget)){
+                $slidesToWidget[] = [
+                    "text" => [
+                        "title" => $slide->getTitle(),
+                        "description" => $slide->getDescription(),
+                    ],
+                    "photos" => $photosToWidget,
+                    "textIndex" => $slide->getTextIndex(),
+                    "activeIndex" => $slide->getActiveIndex(),
 
-            ];
+                ];
+            }
         }
 
-        return $slidesToJson;
+        return $slidesToWidget;
 
     }
 

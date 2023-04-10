@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
-import { example } from './example-base';
 import { Slide } from "./components/slide/slide";
 import { Thumbnails } from "./components/thumbnails/thumbnails";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 
 function App(props) {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [breakingPointSmall, setBreakingPointSmall] = useState(window.innerWidth <= 800);
-
-  const slides = props && typeof props === 'string' ? JSON.parse(props,true) : example;
+  const [breakingPointSmall, setBreakingPointSmall] = useState(
+    window.innerWidth <= 1000
+  );
+  const slides = JSON.parse(props.slides) || [];
   let timeout = null;
 
   useEffect(() => {
@@ -18,25 +18,25 @@ function App(props) {
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("keyup", handleKeyUp);
-      if(timeout)clearTimeout(timeout);
+      if (timeout) clearTimeout(timeout);
     };
   });
 
   const handleResize = () => {
-    if(timeout)clearTimeout(timeout);
+    if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
-      setBreakingPointSmall(window.innerWidth <= 800);
-      handleClickScroll(activeSlideIndex,true);
+      setBreakingPointSmall(window.innerWidth <= 1000);
+      handleClickScroll(activeSlideIndex);
     }, 500);
-  }
+  };
 
   const handleKeyUp = (e) => {
-    if(e.code === 'ArrowRight' || e.code === 'ArrowDown'){
+    if (e.code === "ArrowRight" || e.code === "ArrowDown") {
       handleActiveSlideIndex(activeSlideIndex + 1);
-    }else if(e.code === 'ArrowLeft' || e.code === 'ArrowUp'){
+    } else if (e.code === "ArrowLeft" || e.code === "ArrowUp") {
       handleActiveSlideIndex(activeSlideIndex - 1);
     }
-  }
+  };
 
   const handleActiveSlideIndex = (index) => {
     // loop slides
@@ -46,36 +46,45 @@ function App(props) {
     handleClickScroll(index);
   };
 
-  const handleClickScroll = (index,afterResize=false) => {
-    const slideElement = document.getElementById('slide-'+index);
+  const handleClickScroll = (index) => {
+    const slideElement = document.getElementById("slide-" + index);
     if (slideElement) {
-      slideElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: "start" });
+      slideElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "start",
+      });
     }
   };
 
-  const getThumbnails = () => (
+  const getThumbnails = () =>
     slides
-      ? slides.map((slide) => slide.photos[0])
-      : null
-  );
+      ? slides.map((slide) => slide.photos.length && slide.photos[0])
+      : null;
 
   return (
     <div className="app">
-      <div
-        className="btn"
-        onClick={() => handleActiveSlideIndex(activeSlideIndex - 1)}
-      >
-        <BsChevronLeft />
-      </div>
+      {slides.length > 1 && (
+        <div
+          className="btn"
+          onClick={() => handleActiveSlideIndex(activeSlideIndex - 1)}
+        >
+          <BsChevronLeft />
+        </div>
+      )}
       <div className="slides" id="slides">
-        {slides && slides.map((slide ,index) => (
-          <Slide
-            {...slide}
-            breakingPointSmall={breakingPointSmall}
-            key={index}
-            id={'slide-'+index}
-          />
-        ))}
+        {slides.length > 0 &&
+          slides.map(
+            (slide, index) =>
+              slide.photos.length > 0 && (
+                <Slide
+                  {...slide}
+                  breakingPointSmall={breakingPointSmall}
+                  key={index}
+                  id={"slide-" + index}
+                />
+              )
+          )}
       </div>
       {!breakingPointSmall && (
         <Thumbnails
@@ -84,12 +93,14 @@ function App(props) {
           handleActiveSlideIndex={handleActiveSlideIndex}
         />
       )}
-      <div
-        className="btn"
-        onClick={() => handleActiveSlideIndex(activeSlideIndex + 1)}
-      >
-        <BsChevronRight />
-      </div>
+      {slides.length > 1 && (
+        <div
+          className="btn"
+          onClick={() => handleActiveSlideIndex(activeSlideIndex + 1)}
+        >
+          <BsChevronRight />
+        </div>
+      )}
     </div>
   );
 }

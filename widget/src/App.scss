@@ -33,7 +33,7 @@
 			height: $space * 4;
 		}
 
-		svg{
+		svg {
 			width: $space * 5;
 			height: auto;
 
@@ -48,8 +48,8 @@
 			@media screen and (max-width: $breaking-point-small) {
 				left: unset;
 				right: 0;
-				top:0;
-				transform: rotate(90deg) translate(0% , 20%);
+				top: 0;
+				transform: rotate(90deg) translate(0%, 20%);
 			}
 		}
 
@@ -70,7 +70,7 @@
 		}
 	}
 
-	.slides{
+	.slides {
 		display: flex;
 		flex-flow: column wrap;
 		width: 100vw;

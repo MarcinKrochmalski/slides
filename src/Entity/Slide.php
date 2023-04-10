@@ -44,6 +44,11 @@ class Slide
      */
     private $active;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $activeIndex;
+
     public function __construct()
     {
         $this->photo = new ArrayCollection();
@@ -122,6 +127,18 @@ class Slide
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getActiveIndex(): ?int
+    {
+        return $this->activeIndex;
+    }
+
+    public function setActiveIndex(int $activeIndex): self
+    {
+        $this->activeIndex = $activeIndex;
 
         return $this;
     }

@@ -11,7 +11,14 @@ import {
 import { ItemPhoto } from "./item-photo";
 import { ItemText } from "./item-text";
 
-export function Slide({ photos, text, textIndex, activeIndex, breakingPointSmall, id }) {
+export function Slide({
+  photos,
+  text,
+  textIndex,
+  activeIndex,
+  breakingPointSmall,
+  id,
+}) {
   const [activeItemIndex, setActiveItemIndex] = useState(activeIndex);
   const [classVersion, setClassVersion] = useState(0);
   const [items, setItems] = useState(
@@ -62,13 +69,11 @@ export function Slide({ photos, text, textIndex, activeIndex, breakingPointSmall
   };
 
   const getClassName = (index) => {
-
     let className = "";
     if (items[index].active) {
       className += " active";
     }
-    if(!breakingPointSmall){
-
+    if (!breakingPointSmall) {
       className += " order-" + items[index].order + "-" + classVersion;
 
       if (items[index].jumper) {
@@ -85,10 +90,10 @@ export function Slide({ photos, text, textIndex, activeIndex, breakingPointSmall
   };
 
   const getClassSlideName = () => {
-    if(photos.length > 4)return 'size-1';
-    if(photos.length > 2)return 'size-2';
-    return 'size-3';
-  }
+    if (photos.length > 4) return "size-1";
+    if (photos.length > 2) return "size-2";
+    return "size-3";
+  };
 
   const props = {
     item: null,

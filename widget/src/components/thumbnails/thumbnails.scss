@@ -2,43 +2,43 @@
 
 .thumbnails {
 
-    display: flex;
-    width: 100%;
-    height: $space * 12;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow: hidden;
+	display: flex;
+	width: 100%;
+	height: $space * 12;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	overflow: hidden;
 
-    .container{
+	.container {
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: $space * 13;
-        height: $space * 10;
-        overflow: hidden;
-        border: 1px solid $color-light;
-        box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		max-width: $space * 13;
+		height: $space * 10;
+		overflow: hidden;
+		border: 1px solid $color-light;
+		box-sizing: border-box;
 
-        img{
-            width: $space * 11;
-            height: auto;
-            margin: $space;
-            cursor: pointer;
-            transition: all $time-animation * .2 ease-in-out;
+		img {
+			width: $space * 11;
+			height: auto;
+			margin: $space;
+			cursor: pointer;
+			transition: all $time-animation * .2 ease-in-out;
 
-            &.active{
-                width: $space * 12;
-                margin: $space * .5;
-            }
+			&.active {
+				width: $space * 12;
+				margin: $space * .5;
+			}
 
-            &:hover {
-                opacity: .8;
-                transition: all  $time-animation * .2 ease-in-out;
-            }
-        }
+			&:hover {
+				opacity: .8;
+				transition: all $time-animation * .2 ease-in-out;
+			}
+		}
 
-    }
-  
+	}
+
 }
